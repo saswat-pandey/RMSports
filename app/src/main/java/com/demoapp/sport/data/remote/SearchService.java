@@ -14,4 +14,7 @@ public interface SearchService {
 
     @GET("api/v1/json/1/eventslast.php")
     Call<EventResponse> getEvents(@Query("id") String id);
+
+    @GET("api/v1/json/1/eventsnext.php")
+    Call<ScheduleResponse> getSchedules(@Query("id")String id);
 }

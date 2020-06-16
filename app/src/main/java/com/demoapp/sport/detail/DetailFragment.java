@@ -22,8 +22,12 @@ public class DetailFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = FragmentDetailBinding.inflate(inflater);
+
         mBinding.setLifecycleOwner(this);
+        //getting arguments passed from the main activity fragment
         mTeam = DetailFragmentArgs.fromBundle(getArguments()).getTeam();
+
+        //setting the team in the layout  through binding
         mBinding.setTeam(mTeam);
         return mBinding.getRoot();
     }
@@ -39,6 +43,9 @@ public class DetailFragment extends Fragment {
         mBinding.recyclerLeague.setAdapter(leagueAdapter);
         mBinding.btnUpcomingEvents.setOnClickListener(v -> {
             NavHostFragment.findNavController(this).navigate(DetailFragmentDirections.actionDetailFragmentToEventFragment(mTeam.getIdTeam()));
+        });
+        mBinding.btnUpcomingSchedules.setOnClickListener(v->{
+            NavHostFragment.findNavController(this).navigate(DetailFragmentDirections.actionDetailFragmentToScheduleFragment(mTeam.getIdTeam()));
         });
     }
 

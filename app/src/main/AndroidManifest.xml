@@ -14,7 +14,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-7663537494400138~5726099355"/>
+            android:value="@string/app_admod_id"/>
 
         <activity android:name="com.demoapp.sport.main.MainActivity">
             <intent-filter>

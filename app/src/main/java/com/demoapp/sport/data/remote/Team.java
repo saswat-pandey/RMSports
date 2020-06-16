@@ -251,6 +251,9 @@ public class Team implements Parcelable {
 		strKeywords = in.readString();
 	}
 
+
+	//Classes implementing the Parcelable interface must also have a non-null static field
+	// called CREATOR of a type that implements the Parcelable.Creator interface.
 	public static final Creator<Team> CREATOR = new Creator<Team>() {
 		@Override
 		public Team createFromParcel(Parcel in) {

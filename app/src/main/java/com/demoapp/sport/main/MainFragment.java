@@ -38,15 +38,30 @@ public class MainFragment extends Fragment implements SearchView.OnQueryTextList
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        //binding the layout
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false);
+
+        //getting the service
         mService = Api.getInstance().getService();
+
+        //setting the view model using factory to in order for dependency injection
         mViewModel = new ViewModelProvider(this, new MainViewModelFactory(mService)).get(MainViewModel.class);
         mBinding.setViewModel(mViewModel);
+
+        //the lifecycle methods of the fragment are binded with the model
         mBinding.setLifecycleOwner(this);
+
+        //setting, requesting and loading as ad
         mAdView = mBinding.adView;
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
+        //If true, the fragment has menu items to contribute.
         setHasOptionsMenu(true);
+
+        //Returns the outermost View in the layout file associated with the Binding.
+        // If this binding is for a merge layout file, this will return the first root in the merge tag.
         return mBinding.getRoot();
     }
 
@@ -58,8 +73,12 @@ public class MainFragment extends Fragment implements SearchView.OnQueryTextList
     }
 
     private void setupRecyclerView() {
+        //Setting up team in the teams adapter and
+        // a listener that will use nav graph to send the argument team from main fragment to the details fragment
         mTeamAdapter = new TeamAdapter(new ArrayList<>(), team -> NavHostFragment.findNavController(MainFragment.this).navigate(MainFragmentDirections.actionMainFragmentToDetailFragment(team)));
+        //setting adapter
         mBinding.teamRecycler.setAdapter(mTeamAdapter);
+        //observing teams from MainViewModel  and when there is a change loading up the adapter
         mViewModel.teams.observe(getActivity(), teams -> mTeamAdapter.addData(teams));
     }
 

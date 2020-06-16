@@ -10,7 +10,7 @@ class LeagueViewHolder extends RecyclerView.ViewHolder {
     public ViewDataBinding dataBinding;
 
     public LeagueViewHolder(ViewDataBinding dataBinding) {
-        super(dataBinding.getRoot());
+        super(dataBinding.getRoot()); // The super class contructor takes view as the parameter so we pass the root view of the binding class
         this.dataBinding = dataBinding;
     }
 
